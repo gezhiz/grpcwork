@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package com.worthto.protobuf;
+
+option java_package = "com.worthto.proto";
+option optimize_for = SPEED;
+option java_outer_classname = "PersonProto";
+option java_multiple_files = true;
+
+
+service PersonService {
+    rpc GetRealNameByUserName(MyRequest) returns (MyResponse) {}
+    rpc GetPersonsByAge(MyRequest) returns (stream PersonResponse){}
+    rpc SendNames(stream MyRequest) returns (MyResponse){}
+    rpc SendPersons(stream MyRequest) returns (stream MyResponse){}
+}
+
+message MyRequest {
+    string username = 1;
+}
+message MyResponse {
+    string realname = 2;
+}
+
+message PersonResponse {
+    string name = 3;
+    int32 age = 4;
+    string address = 5;
+
+
+}
+//
+//message Person{
+//    string name = 1;
+//    int32 age = 2;
+//    string address = 3;
+//}
